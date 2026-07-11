@@ -1,0 +1,36 @@
+[
+  {
+    "title": "Example Live Room",
+    "categoryName": "Live music venue",
+    "address": "1 Example Street, Bologna, Italy",
+    "city": "Bologna",
+    "countryCode": "IT",
+    "website": "https://example.com",
+    "phone": "+39 333 123 4567",
+    "phoneUnformatted": "+393331234567",
+    "placeId": "example-place-1",
+    "categories": ["Live music venue", "Bar"],
+    "totalScore": 4.5,
+    "reviewsCount": 120,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "url": "https://maps.google.com/"
+  },
+  {
+    "title": "Example Cultural Centre",
+    "categoryName": "Cultural center",
+    "address": "2 Sample Road, Rome, Italy",
+    "city": "Rome",
+    "countryCode": "IT",
+    "website": "https://example.org",
+    "phone": "+39 06 1234 5678",
+    "phoneUnformatted": "+390612345678",
+    "placeId": "example-place-2",
+    "categories": ["Cultural center", "Event venue"],
+    "totalScore": 4.2,
+    "reviewsCount": 84,
+    "permanentlyClosed": false,
+    "temporarilyClosed": false,
+    "url": "https://maps.google.com/"
+  }
+]
