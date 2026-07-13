@@ -85,6 +85,7 @@ function readInitialWorkspace(
   return envWorkspace;
 }
 
+
 function App() {
   const [remembered, setRemembered] = useState<RememberedWorkspaceState>(() =>
     readRememberedWorkspaces(),
@@ -129,6 +130,18 @@ function App() {
   const [showImport, setShowImport] = useState(false);
 
   const venues = useMemo(() => hydrateVenues(rawVenues), [rawVenues]);
+
+  const provinces = useMemo(
+  () =>
+    [
+      ...new Set(
+        venues
+          .map((venue) => venue.state)
+          .filter(Boolean) as string[],
+      ),
+    ].sort(),
+  [venues],
+);
 
   useEffect(() => {
     document.title = settings.appName || defaultSettings.appName;
@@ -176,18 +189,6 @@ function App() {
     if (!selectedId && venues.length > 0) setSelectedId(venues[0]._id);
   }, [selectedId, venues]);
 
-  const cities = useMemo(
-    () =>
-      [
-        ...new Set(
-          venues
-            .map((venue) => venue.city)
-            .filter(Boolean) as string[],
-        ),
-      ].sort(),
-    [venues],
-  );
-
   const categories = useMemo(
     () =>
       [
@@ -216,6 +217,7 @@ function App() {
       const haystack = [
         venue.title,
         venue.city,
+        venue.state,
         venue.categoryName,
         venue.address,
         venue.website,
@@ -229,7 +231,7 @@ function App() {
       return (
         (!query || haystack.includes(query)) &&
         (statusFilter === 'all' || venue._crm.status === statusFilter) &&
-        (cityFilter === 'all' || venue.city === cityFilter) &&
+        (cityFilter === 'all' || venue.state === cityFilter) &&
         (categoryFilter === 'all' ||
           venue.categoryName === categoryFilter) &&
         (phoneFilter === 'all' || kind === phoneFilter) &&
@@ -718,10 +720,11 @@ function App() {
                   value={cityFilter}
                   onChange={(event) => setCityFilter(event.target.value)}
                 >
-                  <option value="all">All cities</option>
-                  {cities.map((city) => (
-                    <option key={city}>{city}</option>
-                  ))}
+                <option value="all">All provinces</option>
+
+{provinces.map((province) => (
+  <option key={province}>{province}</option>
+))}
                 </select>
               </div>
               <div className="filter-row">
